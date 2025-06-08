@@ -1,11 +1,15 @@
 // URL base del endpoint
 const API_URL = "http://localhost/CRUD/backend/api_productos.php"; // Cambia esta URL según corresponda
 
+
+let productos = []; // Variable array para almacenar los productos
+
 // Obtener todos los productos (GET)
 function listarProductos() {
   fetch(API_URL)
     .then(res => res.json()) // Convierte la respuesta a JSON
     .then(data => {
+      productos = data; // Almacena los productos en el array productos
       console.log("Productos:", data); // Muestra los productos en consola
       mostrarTablaProductos(data); // Llama a la función para mostrar la tabla en el HTML
     })
@@ -25,8 +29,7 @@ function mostrarTablaProductos(productos) {
     html += `<tr><td>${p.id}</td><td>${p.nombre}</td><td>${p.descripcion}</td><td>${p.precio}</td><td> ` +// Estructura principal de la tabla 
       `<button onclick="eliminarProducto(${p.id})">Eliminar</button></td>` + // Botones para eliminar los productos
       `<td><button onclick="document.getElementById('formModificar').style.display='block'; document.getElementById('modificarId').value=${p.id}; document.getElementById('modificarNombre').value='${p.nombre}'; document.getElementById('modificarDescripcion').value='${p.descripcion}'; document.getElementById('modificarPrecio').value='${p.precio}';">Modificar</button></td>` +
-      `</tr>`; // Botones para abrir el formulario para modificar los productos
-
+      `</tr>`;
   });
 
   html += '</tbody></table>';
@@ -43,7 +46,7 @@ function mostrarTablaProductos(productos) {
   container.innerHTML = html;
 }
 
-// Función para hacer submit del formulario de modificación de producto
+// Función para el submit del formulario de modificación de producto
 function enviarModificacion(event) {
   event.preventDefault();
   const id = document.getElementById('modificarId').value;
@@ -106,6 +109,20 @@ function eliminarProducto(id) {
     })
     .catch(err => console.error("Error al eliminar producto:", err));
 }
+
+// Lógica de búsqueda de productos
+document.getElementById('buscadorProductos').addEventListener('input', function () {
+  const texto = this.value.toLowerCase();
+
+  const filtrados = productos.filter(p =>
+    p.nombre.toLowerCase().includes(texto) ||
+    p.descripcion.toLowerCase().includes(texto) ||
+    String(p.id).includes(texto)
+  );
+
+  mostrarTablaProductos(filtrados);
+});
+
 
 // Ejemplos de uso
 // listarProductos();

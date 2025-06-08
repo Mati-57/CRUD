@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Productos</title>
-    <script src="./js/producto.js"></script>
 </head>
 
 <body>
@@ -13,7 +12,8 @@
     <button onclick="listarProductos()">Listar Productos</button>
     <button onclick="mostrarProducto(1)">Mostrar Producto con ID 1</button>
     <button onclick="agregarProducto('Producto Demo', 'Descripción demo', 99.99)">Agregar Producto Demo</button>
-    <button onclick="modificarProducto(1, 'Producto Modificado', 'Descripción modificada', 123.45)">Modificar Producto con ID 1</button>
+    <button onclick="modificarProducto(1, 'Producto Modificado', 'Descripción modificada', 123.45)">Modificar Producto
+        con ID 1</button>
     <button onclick="eliminarProducto(1)">Eliminar Producto con ID 1</button>
 
     <pre id="output"></pre>
@@ -26,7 +26,10 @@
         <button type="submit">Agregar</button>
     </form>
 
+    <input type="text" id="buscadorProductos" placeholder="Buscar productos . . ." /> <!--Barra para buscar productos-->
     <div id="productosContainer"></div>
+
+    <script src="./js/producto.js"></script>
 
     <script>
         // Función para agregar producto desde el formulario
