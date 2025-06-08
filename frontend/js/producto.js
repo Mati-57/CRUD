@@ -1,5 +1,5 @@
 // URL base del endpoint
-const API_URL = "http://localhost/api_productos.php"; // Cambia esta URL según corresponda
+const API_URL = "http://localhost/CRUD/backend/api_productos.php"; // Cambia esta URL según corresponda
 
 // Obtener todos los productos (GET)
 function listarProductos() {
@@ -20,17 +20,45 @@ function mostrarTablaProductos(productos) {
     return;
   }
   let html = '<table border="1" cellpadding="5"><thead><tr>';
-  html += '<th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th></tr></thead><tbody>';
+  html += '<th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>¿Eliminar?</th><th>¿Modificar?</th></tr></thead><tbody>';
   productos.forEach(p => {
-    html += `<tr><td>${p.id}</td><td>${p.nombre}</td><td>${p.descripcion}</td><td>${p.precio}</td></tr>`;
+    html += `<tr><td>${p.id}</td><td>${p.nombre}</td><td>${p.descripcion}</td><td>${p.precio}</td><td> ` +// Estructura principal de la tabla 
+      `<button onclick="eliminarProducto(${p.id})">Eliminar</button></td>` + // Botones para eliminar los productos
+      `<td><button onclick="document.getElementById('formModificar').style.display='block'; document.getElementById('modificarId').value=${p.id}; document.getElementById('modificarNombre').value='${p.nombre}'; document.getElementById('modificarDescripcion').value='${p.descripcion}'; document.getElementById('modificarPrecio').value='${p.precio}';">Modificar</button></td>` +
+      `</tr>`; // Botones para abrir el formulario para modificar los productos
+
   });
+
   html += '</tbody></table>';
+
+  // Formulario para modificar productos
+  html += `<form id="formModificar" style="display:none;" onsubmit="enviarModificacion(event)">` +
+    `<input type="hidden" id="modificarId">` +
+    `<label>Nombre: <input type="text" id="modificarNombre" required></label> ` +
+    `<label>Descripción: <input type="text" id="modificarDescripcion" required></label> ` +
+    `<label>Precio: <input type="text" id="modificarPrecio" required></label> ` +
+    `<button type="submit">Guardar</button>` +
+    `</form>`;
+
   container.innerHTML = html;
+}
+
+// Función para hacer submit del formulario de modificación de producto
+function enviarModificacion(event) {
+  event.preventDefault();
+  const id = document.getElementById('modificarId').value;
+  const nombre = document.getElementById('modificarNombre').value;
+  const descripcion = document.getElementById('modificarDescripcion').value;
+  const precio = document.getElementById('modificarPrecio').value;
+
+  modificarProducto(id, nombre, descripcion, precio);
+
+  document.getElementById('formModificar').style.display = 'none';
 }
 
 // Obtener un producto por ID (GET)
 function mostrarProducto(id) {
-  fetch(`${API_URL}/id/${id}`)
+  fetch(API_URL + '?id=' + id)
     .then(res => res.json()) // Convierte la respuesta a JSON
     .then(data => console.log("Producto:", data)) // Muestra el producto en consola
     .catch(err => console.error("Error al obtener producto:", err));
@@ -44,7 +72,10 @@ function agregarProducto(nombre, descripcion, precio) {
     body: JSON.stringify({ nombre, descripcion, precio })
   })
     .then(res => res.json()) // Convierte la respuesta a JSON
-    .then(data => console.log("Producto agregado:", data)) // Muestra el resultado en consola
+    .then(data => {
+      console.log("Producto agregado:", data) // Muestra el resultado en consola
+      listarProductos()// Vuelve a listar los productos después de agregar
+    })
     .catch(err => console.error("Error al agregar producto:", err));
 }
 
@@ -56,17 +87,23 @@ function modificarProducto(id, nombre, descripcion, precio) {
     body: JSON.stringify({ id, nombre, descripcion, precio })
   })
     .then(res => res.json()) // Convierte la respuesta a JSON
-    .then(data => console.log("Producto modificado:", data)) // Muestra el resultado en consola
+    .then(data => {
+      console.log("Producto modificado:", data) // Muestra el resultado en consola
+      listarProductos(); // Vuelve a listar los productos después de modificar
+    })
     .catch(err => console.error("Error al modificar producto:", err));
 }
 
 // Eliminar un producto (DELETE)
 function eliminarProducto(id) {
-  fetch(`${API_URL}/id/${id}`, {
+  fetch(API_URL + '?id=' + id, {
     method: "DELETE"
   })
     .then(res => res.json()) // Convierte la respuesta a JSON
-    .then(data => console.log("Producto eliminado:", data)) // Muestra el resultado en consola
+    .then(data => {
+      console.log("Producto eliminado:", data) // Muestra el resultado en consola
+      listarProductos(); // Vuelve a listar los productos después de eliminar
+    })
     .catch(err => console.error("Error al eliminar producto:", err));
 }
 
