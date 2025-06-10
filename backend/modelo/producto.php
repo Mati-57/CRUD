@@ -48,6 +48,7 @@ class Producto {
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+    
     // Método para buscar productos por nombre o descripción
     public function buscar($texto) {
     $like = "%$texto%";

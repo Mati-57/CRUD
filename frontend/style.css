@@ -5,21 +5,11 @@ body {
   flex-direction: column;
 }
 
-h1 {
-  text-align: center;
-}
-button {
-  padding: 12px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  backdrop-filter: blur(8px);
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-#botonesPrueba {
-    display: none;
+label,
+.form-label {
+  color: #e0e6f6;
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 #formAgregarProducto {
@@ -28,21 +18,102 @@ button {
   gap: 5px;
   align-items: center;
   margin: 0 auto;
-  padding: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 2%;
+  border: 2px solid rgba(0, 6, 14, 0.3);
   border-radius: 8px;
   margin-bottom: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+#productosContainer {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 18px;
+  background: rgba(34, 64, 122, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#productosContainer table {
+  color: #f5f6fa;
+  background: rgba(34, 64, 122, 0.7);
+  width: 100%;
+  min-width: 600px;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 14px;
+  border-color: rgba(60, 142, 249, 0.3);
+}
+
+#productosContainer th {
+  background: #22407a;
+  color: #f5f6fa;
+}
+
+#productosContainer td {
+  background: rgba(245, 246, 250, 0.05);
+}
+
+h1,
+h2 {
+  color: #f5f6fa;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+button {
+  padding: 12px 24px;
+  border: 1px solid rgba(0, 6, 14, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#botonesPrueba {
+  display: none;
 }
 
 #buscadorProductos {
   display: block;
   margin: 20px auto;
-  width: 50%;        
+  width: 50%;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(0, 6, 14, 0.3);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
   font-size: 1rem;
   backdrop-filter: blur(8px);
+}
+
+input[type="text"],
+input[type="number"],
+#buscadorProductos {
+  background: rgba(245, 246, 250, 0.15);
+  color: #f5f6fa;
+  border: 1px solid rgba(0, 6, 14, 0.3);
+  font-size: 1.05rem;
+  font-family: inherit;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+#buscadorProductos:focus {
+  border-color: rgba(0, 6, 14, 0.3);
+  outline: none;
+  background: rgba(245, 246, 250, 0.25);
+  color: #fff;
 }
