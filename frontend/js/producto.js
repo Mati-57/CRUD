@@ -1,6 +1,9 @@
 // URL base del endpoint
 const API_URL = "http://localhost/CRUD/backend/api_productos.php"; // Cambia esta URL según corresponda
 
+window.onload = function() {
+  listarProductos(); // Llama a la función para listar productos al cargar la página
+};
 
 let productos = []; // Variable array para almacenar los productos
 
@@ -77,7 +80,7 @@ function agregarProducto(nombre, descripcion, precio) {
     .then(res => res.json()) // Convierte la respuesta a JSON
     .then(data => {
       console.log("Producto agregado:", data) // Muestra el resultado en consola
-      listarProductos()// Vuelve a listar los productos después de agregar
+      listarProductos() // Vuelve a listar los productos después de agregar
     })
     .catch(err => console.error("Error al agregar producto:", err));
 }
@@ -110,17 +113,23 @@ function eliminarProducto(id) {
     .catch(err => console.error("Error al eliminar producto:", err));
 }
 
-// Lógica de búsqueda de productos
+// Buscar productos por nombre (GET)
+function buscarProductos(texto) {
+  fetch(API_URL + '?buscar=' + encodeURIComponent(texto))
+    .then(res => res.json())
+    .then(data => {
+      mostrarTablaProductos(data);
+    })
+    .catch(err => console.error("Error al buscar productos:", err));
+}
+
 document.getElementById('buscadorProductos').addEventListener('input', function () {
-  const texto = this.value.toLowerCase();
-
-  const filtrados = productos.filter(p =>
-    p.nombre.toLowerCase().includes(texto) ||
-    p.descripcion.toLowerCase().includes(texto) ||
-    String(p.id).includes(texto)
-  );
-
-  mostrarTablaProductos(filtrados);
+  const texto = this.value.trim();
+  if (texto === "") {
+    listarProductos();
+  } else {
+    buscarProductos(texto);
+  }
 });
 
 

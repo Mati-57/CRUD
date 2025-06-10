@@ -5,6 +5,11 @@ require_once __DIR__ . '/../modelo/producto.php';
 
 $productoModel = new Producto($conn); // Instancia del modelo
 
+function buscarProductos($texto) {
+    global $productoModel;
+    echo json_encode($productoModel->buscar($texto));
+}
+
 function listarProductos() {
     global $productoModel;
     echo json_encode($productoModel->obtenerTodos());

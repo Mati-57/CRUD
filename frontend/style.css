@@ -1,0 +1,48 @@
+body {
+  background: linear-gradient(to left, rgb(51, 81, 134), rgb(69, 98, 160), rgb(51, 81, 134));
+  display: flex;
+  color: white;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+}
+button {
+  padding: 12px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#botonesPrueba {
+    display: none;
+}
+
+#formAgregarProducto {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+#buscadorProductos {
+  display: block;
+  margin: 20px auto;
+  width: 50%;        
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 1rem;
+  backdrop-filter: blur(8px);
+}

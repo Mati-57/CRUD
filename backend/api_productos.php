@@ -5,8 +5,10 @@ require "./controlador/productos.php"; // Importar el controlador que maneja la 
 $requestMethod = $_SERVER["REQUEST_METHOD"];
 
 if ($requestMethod == "GET") {
-    if (isset($_GET['id'])) {
-        mostrarProducto($_GET['id']); // Mostrar un producto específico
+    if (isset($_GET['buscar'])) {
+        buscarProductos($_GET['buscar']); // Buscar productos por nombre
+        } elseif (isset($_GET['id'])) {         
+            mostrarProducto($_GET['id']); // Mostrar un producto específico
     } else {
         listarProductos(); // Listar todos los productos
     }

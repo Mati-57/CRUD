@@ -48,5 +48,14 @@ class Producto {
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+    // Método para buscar productos por nombre o descripción
+    public function buscar($texto) {
+    $like = "%$texto%";
+    $stmt = $this->conn->prepare("SELECT * FROM productos WHERE nombre LIKE ? OR descripcion LIKE ? OR CAST(id AS CHAR) LIKE ?");
+    $stmt->bind_param("sss", $like, $like, $like);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
 }
 ?>
