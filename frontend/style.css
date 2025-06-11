@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap'); /* Importación de la fuente 'Montserrat' */
+
 body {
   background: linear-gradient(to left, rgb(51, 81, 134), rgb(69, 98, 160), rgb(51, 81, 134));
-  display: flex;
-  color: white;
-  flex-direction: column;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif; 
 }
 
 label,
@@ -17,40 +18,60 @@ label,
   flex-direction: column;
   gap: 5px;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto 10px auto;
   padding: 10px 2%;
   border: 2px solid rgba(0, 6, 14, 0.3);
   border-radius: 8px;
-  margin-bottom: 10px;
   width: 100%;
   max-width: 400px;
-  box-sizing: border-box;
 }
 
 #productosContainer {
   width: 100%;
+  max-height: 350px;
+  overflow-y: auto; 
   max-width: 900px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 10px;
   border-radius: 18px;
   background: rgba(34, 64, 122, 0.8);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  overflow-x: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  border: none;
 }
 
-#productosContainer table {
+.table-responsive {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  display: block;
+}
+
+.table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+  background: #22407a;
+  border-radius: 4px;
+}
+
+.table-responsive 
+table {
+  min-width: 420;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
   color: #f5f6fa;
   background: rgba(34, 64, 122, 0.7);
-  width: 100%;
-  min-width: 600px;
-  max-width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  border-radius: 14px;
-  border-color: rgba(60, 142, 249, 0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#productosContainer th,
+#productosContainer td {
+  border: 1px solid rgba(60, 142, 249, 0.25);
+  padding: 10px 8px;
+  text-align: left;
 }
 
 #productosContainer th {
@@ -71,31 +92,43 @@ h2 {
   text-align: center;
 }
 
-button {
+button,
+.btn {
   padding: 12px 24px;
   border: 1px solid rgba(0, 6, 14, 0.3);
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: #fff;
   backdrop-filter: blur(8px);
   border-radius: 10px;
   cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
 }
 
-#botonesPrueba {
-  display: none;
+button:hover,
+.btn:hover,
+button:focus,
+.btn:focus {
+  background: rgba(255, 255, 255, 0.35);
+  color: #22407a;
+  border-color: #fff;
 }
 
 #buscadorProductos {
   display: block;
   margin: 20px auto;
-  width: 50%;
+  width: 58%;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid rgba(0, 6, 14, 0.3);
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: #fff;
   font-size: 1rem;
   backdrop-filter: blur(8px);
+}
+
+#buscadorProductos::placeholder {
+  color: #e0e6f6;
+  opacity: 1;
 }
 
 input[type="text"],
@@ -116,4 +149,112 @@ input[type="number"]:focus,
   outline: none;
   background: rgba(245, 246, 250, 0.25);
   color: #fff;
+}
+
+#botonesPrueba {
+  display: none;
+}
+
+/* Adaptabilidad general desde tablets hasta móviles */
+@media (max-width: 992px) {
+  #formAgregarProducto {
+    max-width: 100%;
+    padding: 12px 5%;
+  }
+
+  #buscadorProductos {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  #productosContainer {
+    max-width: 100%;
+    padding: 10px 5px;
+  }
+
+  #productosContainer table {
+    font-size: 0.95rem;
+    min-width: 100%;
+  }
+
+  #productosContainer th,
+  #productosContainer td {
+    padding: 8px 6px;
+    font-size: 0.95rem;
+  }
+
+  button, .btn {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+
+  h1, h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.9rem;
+  }
+
+  #productosContainer {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 400px;
+  }
+
+  #productosContainer table {
+    width: 100%;
+    font-size: 0.88rem;
+  }
+
+  #productosContainer th,
+  #productosContainer td {
+    font-size: 0.88rem;
+    padding: 6px 4px;
+  }
+
+  h1, h2 {
+    font-size: 1.25rem;
+  }
+
+  button, .btn {
+    font-size: 0.88rem;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  #formAgregarProducto {
+    padding: 8px 4%;
+  }
+
+  #buscadorProductos {
+    width: 100%;
+  }
+
+  #productosContainer {
+    padding: 4px;
+    max-height: none;
+  }
+
+  #productosContainer table {
+    font-size: 0.85rem;
+  }
+
+  #productosContainer th,
+  #productosContainer td {
+    font-size: 0.85rem;
+    padding: 5px 4px;
+  }
+
+  h1, h2 {
+    font-size: 1.1rem;
+  }
+
+  button, .btn {
+    font-size: 0.85rem;
+    padding: 8px 14px;
+  }
 }
